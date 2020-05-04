@@ -19,4 +19,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  async fetch() {
+    await this.$store.dispatch("posts/getPostList").then(res => {
+      this.$store.commit("posts/setAllPost", res);
+    });
+  }
+}
+</script>
+
 <style></style>
