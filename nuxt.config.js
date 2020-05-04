@@ -28,6 +28,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    "~plugins/date-filter.js"
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,6 +41,7 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
   ],
   /*
   ** Build configuration
@@ -50,5 +52,16 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
+
+  axios: {
+  },
+  pageTransition: {
+    name: 'slide-fade',
+    mode: 'out-in'
+  },
+  layoutTransition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
 }
