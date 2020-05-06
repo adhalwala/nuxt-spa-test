@@ -66,4 +66,9 @@ export default {
     name: 'fade',
     mode: 'out-in'
   },
+  env: {
+    baseUrl: process.env.BASE_URL || "https://nuxt-test-2da65.firebaseio.com",
+    authBaseUrl: "https://identitytoolkit.googleapis.com/v1",
+    fbAPIKey: "AIzaSyCk4UcbnM2eQ8hFV6L3eGSjJdVYA3t7VWo"
+  }
 }

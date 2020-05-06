@@ -27,10 +27,16 @@
               ></b-form-input>
             </b-form-group>
             <div>
-            <b-link @click="isLogin = !isLogin">{{ isLogin ? 'New User? Signup' : 'Already a User? Login' }}</b-link>
+              <b-link @click="isLogin = !isLogin">{{
+                isLogin ? "New User? Signup" : "Already a User? Login"
+              }}</b-link>
             </div>
-            <b-button type="submit" variant="primary" v-if="isLogin">Login</b-button>
-            <b-button type="submit" variant="primary" v-if="!isLogin">Sign Up</b-button>
+            <b-button type="submit" variant="primary" v-if="isLogin"
+              >Login</b-button
+            >
+            <b-button type="submit" variant="primary" v-if="!isLogin"
+              >Sign Up</b-button
+            >
           </b-form>
         </b-card>
       </b-col>
@@ -40,7 +46,7 @@
 
 <script>
 export default {
-  layout: "admin",
+  // layout: "admin",
   data() {
     return {
       isLogin: true,
@@ -49,6 +55,36 @@ export default {
         password: ""
       }
     };
+  },
+  methods: {
+    onSubmit() {
+      this.$store
+        .dispatch("auth/authenticateUser", {
+          isLogin: this.isLogin,
+          email: this.authForm.email,
+          password: this.authForm.password
+        })
+        .then(() => {
+          let msg = this.isLogin
+            ? "Login Successfully"
+            : "Sign up Successfully";
+
+          this.$bvToast.toast(msg, {
+            title: "Success",
+            variant: "success",
+            solid: true
+          });
+          this.$router.push("/admin");
+        })
+        .catch(() => {
+          let msg = this.isLogin ? "Invalid Credentials" : "Email Exists";
+          this.$bvToast.toast(msg, {
+            title: "Error",
+            variant: "danger",
+            solid: true
+          });
+        });
+    }
   }
 };
 </script>

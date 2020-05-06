@@ -75,7 +75,7 @@ export default {
         ? { ...this.post }
         : {
             title: "",
-            author: "",
+            author: localStorage.getItem('username') ? localStorage.getItem('username') : "admin",
             content: "",
             thumbnail: "",
             previewText: "",
