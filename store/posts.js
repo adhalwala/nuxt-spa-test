@@ -17,7 +17,7 @@ export const mutations = {
 export const actions = {
   getPostList(vuexContext) {
     return axios
-      .get("https://nuxt-test-2da65.firebaseio.com/posts.json")
+      .get(process.env.baseUrl + "/posts.json")
       .then(res => {
         const postArray = [];
         for (const key in res.data) {
@@ -29,7 +29,7 @@ export const actions = {
   },
   getPostById(vuexContext, payload) {
     return axios
-      .get("https://nuxt-test-2da65.firebaseio.com/posts/" + payload + ".json")
+      .get(process.env.baseUrl + "/posts/" + payload + ".json")
       .then(res => {
         vuexContext.commit("setLoadedPost", { ...res.data, id: payload });
       });
@@ -37,7 +37,7 @@ export const actions = {
   createNewPost(vuexContext, payload) {
     const postData = { ...payload, updatedDate: new Date() };
     return axios
-      .post("https://nuxt-test-2da65.firebaseio.com/posts.json", postData)
+      .post(process.env.baseUrl + "/posts.json", postData)
       .then(res => {
         vuexContext.dispatch("getPostList");
       });
@@ -46,7 +46,7 @@ export const actions = {
     const postData = { ...payload, updatedDate: new Date() };
     return axios
       .put(
-        "https://nuxt-test-2da65.firebaseio.com/posts/" + payload.id + ".json",
+        process.env.baseUrl + "/posts/" + payload.id + ".json",
         postData
       )
       .then(res => {

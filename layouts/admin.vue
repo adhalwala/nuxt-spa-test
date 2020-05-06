@@ -9,7 +9,8 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="/posts">Posts</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
-          <b-nav-item to="/admin">Admin</b-nav-item>
+          <b-nav-item to="/admin">Admin Home</b-nav-item>
+          <b-nav-item @click="onLogout">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -21,12 +22,19 @@
 
 <script>
 export default {
+  middleware: ["check-auth", "auth"],
   async fetch() {
     await this.$store.dispatch("posts/getPostList").then(res => {
       this.$store.commit("posts/setAllPost", res);
     });
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/admin/auth");
+    }
   }
-}
+};
 </script>
 
 <style></style>
