@@ -1,4 +1,4 @@
-# spa-test
+# nuxt-spa-test
 
 > My flawless Nuxt.js project
 
